@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>账户：<input type="text" /></label> {{mz}} </p>
+        <p>密码：<input>{{nms}}</label></p>
+    </div>
+    <button type="button" onclick="ass()"><p>登录</p></button>
+    
+</body>
+<style>
+    body {
+            text-align: center;
+            
+        }
+    
+</style>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data: {
+            mz:"(刘炫昕)" ,
+            nms:"(134652)"
+        }
+    });
+    function ass() {
+        window.alert("登录成功");
+    }
+</script>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Document</title>
+  <style>
+    table,
+    thead,
+    tbody,
+    th,
+    tr,
+    td {
+      border: 1px solid black;
+
+    }
+
+    table {
+      width: 600px;
+      /* 让表格边框进行合并 */
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    tr {
+      height: 30px;
+      line-height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='app'>
+    <table>
+      <thead>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>年龄</th>
+        <th>爱好</th>
+      </thead>
+      <tbody v-for = "(item , index) in list">
+        <tr>
+          <td>{{index+1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.sex}}</td>
+          <td>{{item.age}}</td>
+          <td>{{item.hobby}}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  <script src='vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        list: [
+          { id: 1, name: '小明', age: '20', hobby: '打球', sex: '男' },
+          { id: 1, name: '小黑', age: '12', hobby: '睡觉', sex: '男' },
+          { id: 1, name: '小红', age: '19', hobby: '唱歌', sex: '女' }
+        ]
+      }
+    })
+  </script>
+</body>
+
+</html>

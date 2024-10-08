@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id ="app">
+        
+        <button v-show = "show > 0"  @click="prev()">上一张</button><br>
+        
+        <img v-bind:src="fruit[show]" ><br>
+
+        <button v-show = "show < fruit.length-1"  @click="next()">下一张</button>
+    
+    </div>
+
+    <script src="vue.js"></script>
+
+    <script>
+        const app = new Vue ({
+            el: '#app',
+            
+            data: {
+                show:0,
+                fruit:[
+                    "./10-01.png",
+                    "./10-02.png",
+                    "./11-00.gif",
+                    "./11-01.gif",
+                    "./11-02.gif",
+                    "./11-03.gif",
+                    "./11-04.png",
+                    "./11-05.png"
+
+                ]
+            },
+            methods:{
+                next(){
+                    if(this.show < this.fruit.length-1){
+                        this.show++;
+                    }
+                },
+                prev(){
+                    if(this.show > 0){
+                        this.show--;
+                    }
+                },
+                
+        }
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../js/vue.js"></script>
+    <var id="app">
+            <button @click="a1">+</button>
+            {{as}}
+            <button @click="a2">-</button>
+    </var>
+
+    <script>
+        var a = new Vue({
+            el: "#app",
+            data: {
+                as: "10"
+            },
+            methods: {
+                a1: function() {
+                    this.as++;
+                },
+
+                a2: function() {
+                    this.as--;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

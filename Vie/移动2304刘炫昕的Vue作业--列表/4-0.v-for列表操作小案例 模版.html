@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Document</title>
+</head>
+<style>
+  table,
+  tr,
+  td,
+  th {
+    border: 1px solid black;
+  }
+
+  table {
+    width: 600px;
+    /* 让表格边框进行合并 */
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  tr {
+    height: 30px;
+    line-height: 30px;
+  }
+</style>
+
+<body>
+  <div id='app'>
+    <div class="userinfo">
+      姓名: <input type="text" v-model="userinfo.name"><br><br>
+      年龄: <input type="text" v-model="userinfo.age"><br><br>
+      性别:
+      <input type="radio" value="1" name="sex" v-model="userinfo.sex">男
+      <input type="radio" value="0" name="sex" v-model="userinfo.sex">女
+      <button @click="add">提交</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <td>序号</td>
+          <td>姓名</td>
+          <td>年龄</td>
+          <td>性别</td>
+          <td>操作</td>
+        </tr>
+      </thead>
+      <tbody v-for="(item, index) in userList">
+        <!-- key属性的作用是可以帮助 vue 底层的 diff 算法找到新旧 dom 树之前的最小差异性,提高渲染性能 -->
+        <tr>
+          <td>{{index + 1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.age}}</td>
+          <td>{{item.sex == '1'? "男" : "女"}}</td>
+          <td>
+            <button @click="del(index)">删除</button>
+            <button @click="edit(index)">修改</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <script src='vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        userinfo: {
+          name: '',
+          age: '',
+          sex: ''
+        },
+        userList: [
+          { id: Math.random(), name: 'Tom', age: 18, sex: 1 },
+          { id: Math.random(), name: 'Jerry', age: 20, sex: 0 },
+          { id: Math.random(), name: 'Mike', age: 22, sex: 0 }
+        ],
+      },
+      methods: {
+        del(i) {
+          this.userList = this.userList.filter((item, index) => index!== i);
+        },
+        add() {
+          console.log(this.userinfo);
+          this.userList.push({
+            id: Math.random(),
+            name: this.userinfo.name,
+            age: this.userinfo.age,
+            sex: this.userinfo.sex,
+          });
+          this.userinfo.name = '';
+          this.userinfo.age = '';
+          this.userinfo.sex = '';
+        },
+        edit(index) {
+          const userToEdit = this.userList[index];
+          this.userinfo.name = userToEdit.name;
+          this.userinfo.age = userToEdit.age;
+          this.userinfo.sex = userToEdit.sex;
+          this.userList.splice(index, 1);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
