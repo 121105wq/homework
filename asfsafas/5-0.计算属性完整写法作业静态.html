@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id='app'>
+    <p>
+      <!-- 循环第一个勾选项 -->
+      <label v-for="item in list" :key="item.id">
+        <input type="checkbox" v-model="item.state">
+        {{ item.name }}
+      </label>
+    </p>
+
+    <!-- 全选/全不选 -->
+    <p>
+      <input type="checkbox" v-model="ass"> 全选/全不选
+    </p>
+  </div>
+  <script src='vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        
+        list: [
+          { id: 1, name: '吃饭', state: true },
+          { id: 2, name: '喝水', state: false },
+          { id: 3, name: '打球', state: false }
+        ]
+      },
+      computed:{
+          ass:{
+            get(){
+              return this.list.every(item=>item.state)
+            },
+            set(val){
+              this.list.forEach(item=>item.state=val)
+            }
+          }
+      }
+
+    })
+  </script>
+</body>
+
+</html>
