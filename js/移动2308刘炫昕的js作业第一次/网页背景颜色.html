@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>更改网页背景颜色</title>
+    <style>
+        body {
+            transition: background-color 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>更改网页背景颜色</h1>
+    <label for="color">请输入颜色代码（如：#FF0000 为红色）：</label>
+    <input type="text" id="color" name="color">
+    <button onclick="changeBackground()">更改背景颜色</button>
+
+    <script>
+        function changeBackground() {
+            var color = document.getElementById("color").value;
+            document.body.style.backgroundColor = color;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function sdgwe(HER=[]){
+        for(var e = 1;e<HER.length;e++){
+            for(var ti=0;ti<HER.length-1;ti++){
+                if(HER[ti+1]>HER[ti]){
+                   var j=HER[ti]
+                       HER[ti]=HER[ti+1]
+                          HER[ti+1]=j
+                    }
+                }
+            }
+            console.log(HER);
+        }
+        sdgwe([23,65,45,87,82,34,62,15,79])
+    </script>
+</body>
+</html>
