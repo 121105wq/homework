@@ -1,0 +1,5 @@
+ list: [
+            { id: 1, subject: 'ÓïÎÄ', score: 20 },
+            { id: 7, subject: 'ÊıÑ§', score: 99 },
+            { id: 12, subject: 'Ó¢Óï', score: 70 },
+          ],

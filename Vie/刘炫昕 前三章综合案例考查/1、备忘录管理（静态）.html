@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>vue-todo</title>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+  <div id="app">
+    <div data-v-ee48fd14="" class="hello">
+      <section data-v-ee48fd14="" class="todoapp">
+        <header data-v-ee48fd14="" class="header">
+          <h1 data-v-ee48fd14="">todos</h1>
+          <input data-v-ee48fd14="" placeholder="What needs to be done?" autofocus="autofocus" class="new-todo" v-model="newTodo" @keyup.enter="add">
+        </header>
+        <section data-v-ee48fd14="" class="main">
+          <input data-v-ee48fd14="" id="toggle-all" type="checkbox" class="toggle-all" @click="toggleAll">
+          <label data-v-ee48fd14="" for="toggle-all">Mark all as complete</label>
+          <ul data-v-ee48fd14="" class="todo-list">
+            <li data-v-ee48fd14="" :class="{completed:item.completed}" v-for="(item,index) in filteredTodoList" :key="item.id">
+              <div data-v-ee48fd14="" class="view">
+                <input data-v-ee48fd14="" type="checkbox" class="toggle" v-model="item.completed">
+                <label data-v-ee48fd14="">{{item.name}}</label>
+                <button data-v-ee48fd14="" class="destroy" @click="remove(index)"></button>
+              </div>
+              <input data-v-ee48fd14="" class="edit">
+            </li>
+          </ul>
+        </section>
+        <footer data-v-ee48fd14="" class="footer">
+          <span data-v-ee48fd14="" class="todo-count"><strong>{{remaining}}</strong> 未完成</span>
+          <ul data-v-ee48fd14="" class="filters">
+            <li data-v-ee48fd14=""><a data-v-ee48fd14="" href="javascript:;" :class="{selected: filter === 'all'}" @click="filter ='all'">所有</a></li>
+            <li data-v-ee48fd14=""><a data-v-ee48fd14="" href="javascript:;" :class="{selected: filter === 'active'}" @click="filter ='active'">未完成</a></li>
+            <li data-v-ee48fd14=""><a data-v-ee48fd14="" href="javascript:;" :class="{selected: filter === 'completed'}" @click="filter = 'completed'">已完成</a></li>
+          </ul>
+          <button data-v-ee48fd14="" class="clear-completed" @click="clearCompleted" v-if="completedCount">清空列表</button>
+        </footer>
+      </section>
+    </div>
+  </div>
+  <script src="./js/vue2.js"></script>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data() {
+        return {
+          newTodo: '',
+          filter: 'all',
+          todoList: [
+            { id: 1, name: '吃饭', completed: false },
+            { id: 2, name: '睡觉', completed: true },
+            { id: 3, name: '打豆豆', completed: false },
+            { id: 4, name: '看电影', completed: true },
+          ]
+        }
+      },
+      computed: {
+        remaining() {
+          return this.todoList.filter(item => !item.completed).length;
+        },
+        completedCount() {
+          return this.todoList.filter(item => item.completed).length;
+        },
+        filteredTodoList() {
+          if (this.filter === 'all') {
+            return this.todoList;
+          } else if (this.filter === 'active') {
+            return this.todoList.filter(item => !item.completed);
+          } else if (this.filter === 'completed') {
+            return this.todoList.filter(item => item.completed);
+          }
+          return this.todoList;
+        }
+      },
+      methods: {
+        add() {
+          if (this.newTodo.trim() !== '') {
+            this.todoList.push({
+              id: Date.now(),
+              name: this.newTodo,
+              completed: false
+            });
+            this.newTodo = '';
+          }
+        },
+        remove(index) {
+          this.todoList.splice(index, 1);
+        },
+        toggleAll(event) {
+          const isChecked = event.target.checked;
+          this.todoList.forEach(item => {
+            item.completed = isChecked;
+          });
+        },
+        clearCompleted() {
+          this.todoList = this.todoList.filter(item => !item.completed);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
